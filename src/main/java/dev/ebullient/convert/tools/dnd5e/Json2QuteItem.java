@@ -62,6 +62,7 @@ public class Json2QuteItem extends Json2QuteCommon {
             String dmg1 = getTextOrDefault(node, "dmg1", null);
             String dmg2 = getTextOrDefault(node, "dmg2", null);
             String dmgType = getTextOrDefault(node, "dmgType", null);
+            dmgType = getFullDamageType(dmgType);
             damage = dmg1 + " " + dmgType;
             if (dmg2 != null && !dmg2.isBlank()) {
                 damage2h = dmg2 + " " + dmgType;
@@ -79,6 +80,42 @@ public class Json2QuteItem extends Json2QuteCommon {
                 text,
                 fluffImages,
                 tags);
+    }
+
+    /**
+     * @param damageKey 5eTools single-letter key representing a damage type
+     * @return Full string name of damage type (e.g. S -> Slashing)
+     */
+    private String getFullDamageType(String damageKey) {
+        switch (damageKey) {
+            case "A":
+                return "Acid";
+            case "B":
+                return "Bludgeoning";
+            case "C":
+                return "Cold";
+            case "F":
+                return "Fire";
+            case "O":
+                return "Force";
+            case "L":
+                return "Lightning";
+            case "N":
+                return "Necrotic";
+            case "P":
+                return "Piercing";
+            case "I":
+                return "Poison";
+            case "Y":
+                return "Psychic";
+            case "R":
+                return "Radiant";
+            case "S":
+                return "Slashing";
+            case "T":
+                return "Thunder";
+        }
+        return damageKey;
     }
 
     private String gpValue() {
